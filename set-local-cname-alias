@@ -21,7 +21,7 @@ HOSTS="/etc/hosts"
 
 if [ -z $1 ] || [ -z $2 ] || [ $1 = "--help" ] || [ $1 = "--h" ] ; then 
    echo
-   echo "Call: $ME <domain-to-test> <cname-or-alias-of-instance>"
+   echo "Call: $ME <domain-to-test> <cname-or-alias-of-instance> [<alternative-hosts-file>]"
    echo "Samples:"
    echo "mydomain.com ec2-34-248-247-132.eu-west-1.compute.amazonaws.com"
    echo "                            OR"
