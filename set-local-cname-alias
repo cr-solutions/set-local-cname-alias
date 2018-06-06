@@ -28,6 +28,7 @@ if [ -z $1 ] || [ -z $2 ] || [ $1 = "--help" ] || [ $1 = "--h" ] ; then
    echo "mydomain.com Web-Frontend-8524384526.eu-west-1.elb.amazonaws.com"
    echo "mydomain.com Web-Frontend-8524384526.eu-west-1.elb.amazonaws.com /mnt/c/Windows/System32/drivers/etc/hosts"
    echo 
+   exit
 fi
 
 if [ ! -z $3 ] ; then
