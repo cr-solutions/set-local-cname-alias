@@ -1,0 +1,48 @@
+#!/bin/bash
+
+# The contents of this file are subject to the Mozilla Public License
+# Version 1.1 (the "License"); you may not use this file except in compliance
+# with the License. You may obtain a copy of the License at
+# https://www.mozilla.org/en-US/MPL/2.0/
+
+# Software distributed under the License is distributed on an "AS IS" basis,
+# WITHOUT WARRANTY OF ANY KIND, either expressed or implied. See the License for
+# the specific language governing rights and limitations under the License.
+
+# The Initial Developers of the Original Code are: 
+# Copyright (c) 2018, CR-Solutions (http://www.cr-solutions.net), Ricardo Cescon
+# All Rights Reserved.
+ 
+
+DOMAIN=$1
+ALIAS=$2
+ME=`basename "$0"`
+HOSTS="/etc/hosts"
+
+if [ -z $1 ] || [ -z $2 ] || [ $1 = "--help" ] || [ $1 = "--h" ] ; then 
+   echo
+   echo "Call: $ME <domain-to-test> <cname-or-alias-of-instance>"
+   echo "Samples:"
+   echo "mydomain.com ec2-34-248-247-132.eu-west-1.compute.amazonaws.com"
+   echo "                            OR"
+   echo "mydomain.com Web-Frontend-8524384526.eu-west-1.elb.amazonaws.com"
+   echo "mydomain.com Web-Frontend-8524384526.eu-west-1.elb.amazonaws.com /mnt/c/Windows/System32/drivers/etc/hosts"
+   echo 
+fi
+
+if [ ! -z $3 ] ; then
+   HOSTS=$3
+fi
+
+IP=`host -t a $ALIAS | head -n1 | awk '{print $4}'`
+
+echo
+echo "Set/Update $DOMAIN to $IP ($ALIAS)"
+echo 
+
+if test -n "$IP"; then
+    grep -v $DOMAIN $HOSTS > /tmp/hosts
+    echo "$IP $DOMAIN" >> /tmp/hosts
+    cp /tmp/hosts $HOSTS
+fi
+
