@@ -42,7 +42,7 @@ echo "Set/Update $DOMAIN to $IP ($ALIAS)"
 echo 
 
 if test -n "$IP"; then
-    grep -v $DOMAIN $HOSTS > /tmp/hosts
+    grep -v " $DOMAIN" $HOSTS > /tmp/hosts
     echo "$IP $DOMAIN" >> /tmp/hosts
     cp /tmp/hosts $HOSTS
 fi
